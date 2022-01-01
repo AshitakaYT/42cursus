@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aucousin <aucousin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 08:01:00 by aucousin          #+#    #+#             */
-/*   Updated: 2021/12/19 11:50:37 by aucousin         ###   ########lyon.fr   */
+/*   Updated: 2022/01/01 15:52:56 by aucousin         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../hdrs/so_long.h"
+#include "so_long.h"
 
 int	ft_is_cep01(char c)
 {
@@ -49,65 +49,41 @@ int	ft_is_one_cep(struct s_map map)
 	return (1);
 }
 
-int	ft_is_parsing_ok(struct s_map map)
+int	ft_is_parsing_ok(struct s_map *map)
 {
-//	if (!ft_is_size_ok(map) || !ft_is_one_cep(map) || !ft_is_wall_ok(map))
-	printf("ok\n");
-	if (!ft_is_size_ok(&map))
+	if (!ft_is_size_ok(map))
 		return (0);
-	printf("ok\n");
-	if (!ft_is_one_cep(map))
+	if (!ft_is_one_cep(*map))
 		return (0);
-	printf("ok\n");
-	if (!ft_is_wall_ok(map))
-		return (0);
-	printf("ok\n");
-	return (1);
-}
-
-int	ft_so_long(char *av)
-{
-	t_map	map;
-
-	if (!ft_get_file(av))
-		return (0);
-	map.file = ft_get_file(av);
-	if (!map.file)
-		return (0);
-	printf("%s\n", map.file);
-	map.mapchar = ft_split(map.file, '\n');
-	if (!map.mapchar || !map.mapchar[0])
-		return (0);
-	if (!ft_is_parsing_ok(map))
+	if (!ft_is_wall_ok(*map))
 		return (0);
 	return (1);
 }
 
-int	ft_close(t_ptrs *ptr)
+int	ft_get_height(char **map)
 {
-	mlx_destroy_window(ptr->mlx_ptr, ptr->win_ptr);
-	exit(EXIT_SUCCESS);
+	int i;
+
+	i = 0;
+	while (map[i])
+		i++;
+	return (i);
 }
 
-int	ft_mlx(void)
+int	ft_parsing(char *av, t_program *program)
 {
-	t_ptrs	ptr;
-
-	ptr.mlx_ptr = mlx_init();
-	ptr.win_ptr = mlx_new_window(ptr.mlx_ptr, 1000, 1000, "so long");
-	mlx_hook(ptr.win_ptr, 17, 1L << 2, ft_close, &ptr);
-	mlx_loop(ptr.mlx_ptr);
-	return (1);
-}
-
-int	main(int ac, char **av)
-{
-	if (ac != 2)
+	program->map.file = ft_get_file(av);
+	if (!program->map.file)
 		return (0);
-	if (ft_so_long(av[1]))
-		printf("map OK\n");
-	else
-		printf("map KO\n");
-	ft_mlx();
-	return (0);
+	program->map.mapchar = ft_split(program->map.file, '\n');
+	free(program->map.file);
+	if (!program->map.mapchar || !program->map.mapchar[0])
+		return (0);
+	program->map.mapheight = ft_get_height(program->map.mapchar);
+	if (!ft_is_parsing_ok(&program->map))
+	{
+		ft_free_fct(program->map.mapchar, program->map.mapheight);
+		return (0);
+	}
+	return (1);
 }
