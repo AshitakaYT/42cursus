@@ -6,7 +6,7 @@
 /*   By: aucousin <aucousin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 16:04:53 by aucousin          #+#    #+#             */
-/*   Updated: 2022/04/12 16:01:19 by aucousin         ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 09:00:41 by aucousin         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	ft_four(t_stacks *stacks)
 {
 	while (stacks->a[0] != 0)
 		ft_ra(stacks);
-	ft_up_smaller(stacks);
 	ft_pb(stacks);
 	ft_three(stacks);
 	ft_pa(stacks);

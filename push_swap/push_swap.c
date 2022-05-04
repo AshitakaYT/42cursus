@@ -6,7 +6,7 @@
 /*   By: aucousin <aucousin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 17:11:28 by aucousin          #+#    #+#             */
-/*   Updated: 2022/04/12 16:23:17 by aucousin         ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 15:31:46 by aucousin         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ void	ft_solve_big(t_stacks *stacks)
 			j++;
 		}
 		while (j--)
-		{
 			ft_pa(stacks);
-		}
 		i++;
 	}
 }
@@ -88,22 +86,20 @@ int	main(int ac, char **av)
 	t_stacks	stacks;
 
 	if (!ft_parsing1(ac, av))
-		return (0);
-	ft_init(&stacks, ac, av);
-	if (!ft_parsing2(&stacks))
 	{
-		free(stacks.a);
-		free(stacks.b);
-		free(stacks.alabeled);
-		printf("unvalid parameters.\n");
+		ft_putstr_fd("Error\n", 2);
+		return (0);
+	}
+	if (!ft_init(&stacks, ac, av) || !ft_parsing2(&stacks))
+	{
+		ft_free_stacks(&stacks);
+		ft_putstr_fd("Error\n", 2);
 		return (0);
 	}
 	else
 	{
 		ft_push_swap(&stacks);
-		free(stacks.a);
-		free(stacks.b);
-		free(stacks.alabeled);
+		ft_free_stacks(&stacks);
 		return (0);
 	}
 }

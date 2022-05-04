@@ -6,7 +6,7 @@
 #    By: aucousin <aucousin@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/30 13:56:09 by aucousin          #+#    #+#              #
-#    Updated: 2022/04/12 16:35:01 by aucousin         ###   ########lyon.fr    #
+#    Updated: 2022/04/26 15:26:51 by aucousin         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ CURSIVE='\033[3m'
 
 all: maker $(NAME)
 
-$(OBJSDIR)%.o : %.c		hdrs/push_swap.h
+$(OBJSDIR)%.o : %.c		hdrs/push_swap.h libft/libft.a Makefile
 	@mkdir -p $(OBJSDIR)
 	@mkdir -p $(OBJSDIR)srcs
 	@gcc $(FLAGS) -c $< -o $@
@@ -38,7 +38,6 @@ $(NAME): $(OBJS)
 	@echo $(CURSIVE)$(GRAY) "     - Compiling $(NAME)..." $(NONE)
 	@gcc $(FLAGS) $(OBJS) $(LINKS) -o $(NAME)
 	@echo $(GREEN)"- Compiled -"$(NONE)
-#	@rm $(OBJ)
 	@echo $(CURSIVE)$(GRAY) "     Deleted object files" $(NONE)
 
 maker:
@@ -59,5 +58,7 @@ fclean: clean
 	@echo $(CURSIVE)$(GRAY) "     - Removing $(NAME)..." $(NONE)
 	@rm -rf $(NAME)
 	@make fclean -C libft
+	
 re: fclean all
 
+.PHONY: make re fclean clean maker all

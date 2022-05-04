@@ -6,7 +6,7 @@
 /*   By: aucousin <aucousin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 17:12:09 by aucousin          #+#    #+#             */
-/*   Updated: 2022/04/12 16:03:06 by aucousin         ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 12:03:37 by aucousin         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,18 @@ void	ft_print_stacks(t_stacks stacks);
 int		ft_is_sorted(int *a, int size);
 void	ft_sort_int_tab(int *tab, int size);
 void	ft_up_smaller(t_stacks *stacks);
+void	ft_free(void *content);
+void	ft_free_stacks(t_stacks *stacks);
 
 // INIT
 
 void	ft_init_b(t_stacks *stacks);
-void	ft_init(t_stacks *stacks, int ac, char **av);
+int		ft_init(t_stacks *stacks, int ac, char **av);
 void	ft_copy_a(t_stacks *stacks);
 
 // PARSING
 int		ft_parsing1(int ac, char **av);
 int		ft_parsing2(t_stacks *stacks);
-int		*ft_get_args(int ac, char **av);
+void	ft_get_args(t_stacks *stacks, int ac, char **av);
 
 #endif

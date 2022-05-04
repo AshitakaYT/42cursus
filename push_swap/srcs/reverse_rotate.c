@@ -6,7 +6,7 @@
 /*   By: aucousin <aucousin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 07:07:08 by aucousin          #+#    #+#             */
-/*   Updated: 2022/01/04 07:17:22 by aucousin         ###   ########lyon.fr   */
+/*   Updated: 2022/04/15 11:07:14 by aucousin         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_rra(t_stacks *stacks)
 		ft_swap(&stacks->a[i], &stacks->a[i - 1]);
 		i--;
 	}
-	printf("rra\n");
+	ft_putstr_fd("rra\n", 1);
 }
 
 void	ft_rrb(t_stacks *stacks)
@@ -35,12 +35,12 @@ void	ft_rrb(t_stacks *stacks)
 		ft_swap(&stacks->b[i], &stacks->b[i - 1]);
 		i--;
 	}
-	printf("rrb\n");
+	ft_putstr_fd("rrb\n", 1);
 }
 
 void	ft_rrr(t_stacks *stacks)
 {
 	ft_rra(stacks);
 	ft_rrb(stacks);
-	printf("rrr\n");
+	ft_putstr_fd("rrr\n", 1);
 }

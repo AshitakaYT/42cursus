@@ -6,7 +6,7 @@
 /*   By: aucousin <aucousin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 07:09:20 by aucousin          #+#    #+#             */
-/*   Updated: 2022/04/12 16:21:19 by aucousin         ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 11:40:54 by aucousin         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_parsing1(int ac, char **av)
 		j = 0;
 		while (av[i][j])
 		{
-			if (av[i][j] == '-' && av[i][j + 1])
+			if (j == 0 && (av[i][j] == '-' || av[i][j] == '+') && av[i][j + 1])
 				j++;
 			if (!ft_isdigit(av[i][j]))
 				return (0);
@@ -43,7 +43,7 @@ int	ft_parsing2(t_stacks *stacks)
 
 	i = 0;
 	j = i + 1;
-	if (stacks->sizeinit < 1)
+	if (stacks->sizeinit < 1 || !stacks->a || !stacks->b || !stacks->alabeled)
 		return (0);
 	while (i < stacks->sizeinit)
 	{
@@ -80,29 +80,30 @@ int	ft_check_int(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		result = result * 10 + str[i] - '0';
-		if (result > 2147483647 || (result > 2147483648 && sign == -1))
+		if (result >= 2147483647 || (result >= 2147483648 && sign == -1))
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int	*ft_get_args(int ac, char **av)
+void	ft_get_args(t_stacks *stacks, int ac, char **av)
 {
 	int	i;
-	int	*stacks;
 
 	i = 1;
-	stacks = malloc(sizeof(int) * (ac - 1));
+	stacks->a = malloc(sizeof(int) * (ac - 1));
+	if (!stacks->a)
+		return ;
 	while (i < ac)
 	{
 		if (!ft_check_int(av[i]))
 		{
-			free(stacks);
-			return (NULL);
+			stacks->a = NULL;
+			free(stacks->a);
+			return ;
 		}
-		stacks[i - 1] = ft_atoi(av[i]);
+		stacks->a[i - 1] = ft_atoi(av[i]);
 		i++;
 	}
-	return (stacks);
 }
