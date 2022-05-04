@@ -6,11 +6,11 @@
 /*   By: aucousin <aucousin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 11:14:43 by aucousin          #+#    #+#             */
-/*   Updated: 2022/01/01 15:08:37 by aucousin         ###   ########lyon.fr   */
+/*   Updated: 2022/04/28 09:11:38 by aucousin         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./so_long.h"
+#include "../hdrs/so_long.h"
 
 void	ft_print_char_tab(char **tab)
 {
@@ -74,4 +74,17 @@ int	ft_is_wall_ok(struct s_map map)
 		!ft_check_wall_line(map.mapchar[i - 1]))
 		return (0);
 	return (1);
+}
+
+int	ft_check_ber(char *str)
+{
+	int	i;
+
+	i = ft_strlen(str);
+	if (i > 4 && str[i - 1] == 'r' && str[i - 2] == 'e'
+		&& str[i - 3] == 'b' && str[i - 4] == '.')
+	{
+		return (1);
+	}
+	return (0);
 }

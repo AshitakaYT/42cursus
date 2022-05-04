@@ -6,11 +6,11 @@
 /*   By: aucousin <aucousin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 08:01:00 by aucousin          #+#    #+#             */
-/*   Updated: 2022/01/01 15:52:56 by aucousin         ###   ########lyon.fr   */
+/*   Updated: 2022/04/28 11:06:50 by aucousin         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../hdrs/so_long.h"
 
 int	ft_is_cep01(char c)
 {
@@ -21,39 +21,42 @@ int	ft_is_cep01(char c)
 	return (1);
 }
 
-int	ft_is_one_cep(struct s_map map)
+int	ft_is_one_cep(struct s_map *map)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (map.mapchar[i])
+	while (map->mapchar[i])
 	{
 		j = 0;
-		while (map.mapchar[i][j])
+		while (map->mapchar[i][j])
 		{
-			if (!ft_is_cep01(map.mapchar[i][j]))
+			if (!ft_is_cep01(map->mapchar[i][j]))
 				return (0);
-			else if (map.mapchar[i][j] == 'E')
-				map.exit = 1;
-			else if (map.mapchar[i][j] == 'C')
-				map.col = 1;
-			else if (map.mapchar[i][j] == 'P')
-				map.pos = 1;
+			else if (map->mapchar[i][j] == 'E')
+				map->exit++;
+			else if (map->mapchar[i][j] == 'C')
+				map->col++;
+			else if (map->mapchar[i][j] == 'P')
+				map->pos++;
 			j++;
 		}
 		i++;
 	}
-	if (map.exit != 1 || map.col != 1 || map.pos != 1)
+	if (map->exit != 1 || map->col == 0 || map->pos != 1)
 		return (0);
 	return (1);
 }
 
 int	ft_is_parsing_ok(struct s_map *map)
 {
+	map->exit = 0;
+	map->col = 0;
+	map->pos = 0;
 	if (!ft_is_size_ok(map))
 		return (0);
-	if (!ft_is_one_cep(*map))
+	if (!ft_is_one_cep(map))
 		return (0);
 	if (!ft_is_wall_ok(*map))
 		return (0);
@@ -62,7 +65,7 @@ int	ft_is_parsing_ok(struct s_map *map)
 
 int	ft_get_height(char **map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map[i])
@@ -72,6 +75,8 @@ int	ft_get_height(char **map)
 
 int	ft_parsing(char *av, t_program *program)
 {
+	if (!ft_check_ber(av))
+		return (0);
 	program->map.file = ft_get_file(av);
 	if (!program->map.file)
 		return (0);

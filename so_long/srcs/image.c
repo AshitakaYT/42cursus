@@ -6,11 +6,11 @@
 /*   By: aucousin <aucousin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 13:34:54 by aucousin          #+#    #+#             */
-/*   Updated: 2022/01/01 14:57:43 by aucousin         ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 16:48:23 by aucousin         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../hdrs/so_long.h"
 
 t_image	ft_new_image(void *mlx, int width, int height)
 {

@@ -6,15 +6,15 @@
 /*   By: aucousin <aucousin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 11:46:28 by aucousin          #+#    #+#             */
-/*   Updated: 2022/01/01 15:18:45 by aucousin         ###   ########lyon.fr   */
+/*   Updated: 2022/04/28 11:43:06 by aucousin         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../hdrs/so_long.h"
 
 /* Any functon that you hook with the key event must be like this:
 * Recibing and int for the code of the key pressed
-* and a void pointer in case you need to recibe someting */
+* and a void pointer in case you need to recibe something */
 
 void	ft_print_elem(t_program *program, int xpos, int ypos)
 {
@@ -70,18 +70,22 @@ int	ft_input(int key, void *param)
 	program = (t_program *)param;
 	mlx_clear_window(program->mlx, program->window.reference);
 	ft_map(program, 0, 0);
-	if (key == 100)
-		ft_moveright(program);
-	else if (key == 97)
-		ft_moveleft(program);
-	else if (key == 115)
-		ft_movedown(program);
-	else if (key == 119)
-		ft_moveup(program);
-	else if (key == 65307)
+	if (key == 2)
+		ft_moveright(program, program->map.mapchar[program->sprite_position.i]
+		[program->sprite_position.j + 1]);
+	else if (key == 0)
+		ft_moveleft(program, program->map.mapchar[program->sprite_position.i]
+		[program->sprite_position.j - 1]);
+	else if (key == 1)
+		ft_movedown(program, program->map.mapchar
+		[program->sprite_position.i + 1][program->sprite_position.j]);
+	else if (key == 13)
+		ft_moveup(program, program->map.mapchar[program->sprite_position.i - 1]
+		[program->sprite_position.j]);
+	else if (key == 53)
 		ft_close(program);
+	mlx_hook(program->window.reference, 17, 1L << 2, ft_close, program);
 	ft_map(program, 0, 0);
-	mlx_hook(program->window.reference, ON_DESTROY, 1L << 2, ft_close, program);
 	return (0);
 }
 

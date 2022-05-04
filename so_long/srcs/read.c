@@ -6,11 +6,11 @@
 /*   By: aucousin <aucousin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 11:19:05 by aucousin          #+#    #+#             */
-/*   Updated: 2022/01/01 15:49:04 by aucousin         ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 16:48:50 by aucousin         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./so_long.h"
+#include "../hdrs/so_long.h"
 
 char	*ft_fullfill_tab(int fd, char *res1, char buf)
 {

@@ -6,15 +6,16 @@
 /*   By: aucousin <aucousin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 09:41:36 by aucousin          #+#    #+#             */
-/*   Updated: 2022/01/01 15:01:25 by aucousin         ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 07:44:31 by aucousin         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../hdrs/so_long.h"
 
 int	ft_close(t_program *win)
 {
-	mlx_destroy_window(win->mlx, win->window.reference);
+	if (win != NULL)
+		mlx_destroy_window(win->mlx, win->window.reference);
 	exit(EXIT_SUCCESS);
 }
 

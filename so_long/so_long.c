@@ -6,7 +6,7 @@
 /*   By: aucousin <aucousin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 13:34:46 by aucousin          #+#    #+#             */
-/*   Updated: 2022/01/01 15:56:44 by aucousin         ###   ########lyon.fr   */
+/*   Updated: 2022/04/15 13:39:48 by aucousin         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	ft_mlx(t_program program)
 {
 	program.moves = 0;
 	program.mlx = mlx_init();
-	program.window = ft_new_window(program.mlx, 3000, 2100, "BERSERK!");
+	program.window = ft_new_window(program.mlx, (program.map.mapwidth * 100),
+			(program.map.mapheight * 100), "./so_long");
 	ft_create_sprites(&program);
 	mlx_put_image_to_window(program.mlx, program.window.reference,
 		program.sprite.reference, program.sprite_position.x,
