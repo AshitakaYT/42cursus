@@ -6,11 +6,11 @@
 /*   By: aucousin <aucousin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 11:23:09 by acousin           #+#    #+#             */
-/*   Updated: 2022/05/04 07:26:24 by aucousin         ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 12:07:45 by aucousin         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hdrs/pipex.h"
+#include "./hdrs/pipex.h"
 
 int	ft_child_status(int child_status)
 {

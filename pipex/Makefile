@@ -16,7 +16,7 @@ CURSIVE='\033[3m'
 
 all: $(NAME)
 
-$(OBJSDIR)%.o : %.c		hdrs/pipex.h
+$(OBJSDIR)%.o : %.c		hdrs/pipex.h libft/libft.a Makefile
 	@mkdir -p $(OBJSDIR)
 	@mkdir -p $(OBJSDIR)srcs
 	@gcc $(FLAGS) -c $< -o $@
